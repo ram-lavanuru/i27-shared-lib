@@ -1,4 +1,5 @@
 import com.i27academy.builds.Calculator
+import com.i27academy.builds.Docker
 
 def call(Map pipelineParams) {
     Calculator calculator = new Calculator(this)
@@ -43,7 +44,7 @@ def call(Map pipelineParams) {
             jdk 'JDK-17'
         }
         environment {
-                APPLICATION_NAME = "pipelineParams.appName"
+                APPLICATION_NAME = ${pipelineParams.appName}
                 SONAR_TOKEN = credentials('sonar-creds')
                 // SONAR_URL = "http://35.223.190.169:9000"
                 //https://www.jenkins.io/doc/pipeline/steps/pipeline-utility-steps/#readmavenpom-read-a-maven-project-file
@@ -209,12 +210,12 @@ def imageValidation() {
     }
 }
 
-def build() {
-    return {
-        echo "*****builiding the ${env.APPLICATION_NAME} application"
-        sh 'mvn clean package -DskipTests=true'
-    }
-}
+// def build() {
+//     return {
+//         echo "*****builiding the ${env.APPLICATION_NAME} application"
+//         sh 'mvn clean package -DskipTests=true'
+//     }
+// }
 
 
 def dockerBuild() {
