@@ -68,7 +68,8 @@ def call(Map pipelineParams) {
             }
                 steps {
                     script {
-                        build().call()
+                        // build().call()
+                        docker.build("${APPLICATION_NAME}")
                     }
                 }
             }
