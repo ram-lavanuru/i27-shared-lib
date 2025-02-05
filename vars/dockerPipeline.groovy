@@ -46,6 +46,8 @@ def call(Map pipelineParams) {
         }
         environment {
                 APPLICATION_NAME = "${pipelineParams.appName}"
+                HOST_PORT = "${pipelineParams.hostPort}"
+                CONT_PORT = "${pipelineParams.contPort}"
                 SONAR_TOKEN = credentials('sonar-creds')
                 // SONAR_URL = "http://35.223.190.169:9000"
                 //https://www.jenkins.io/doc/pipeline/steps/pipeline-utility-steps/#readmavenpom-read-a-maven-project-file
@@ -125,7 +127,7 @@ def call(Map pipelineParams) {
                 steps {
                     script {
                         imageValidation().call()
-                        dockerDeploy('dev', '5761', '8761').call()
+                        dockerDeploy('dev', "${HOST_PORT}", "${CONT_PORT}").call()
                     }
                         }
                         
@@ -139,7 +141,7 @@ def call(Map pipelineParams) {
                 steps {
                     script {
                         imageValidation().call()
-                        dockerDeploy('tst', '6761', '8761').call()
+                        dockerDeploy('tst', "${HOST_PORT}", "${CONT_PORT}").call()
                     }
                         }
                         
@@ -160,7 +162,7 @@ def call(Map pipelineParams) {
                 steps {
                     script {
                         imageValidation().call()
-                        dockerDeploy('stg', '7761', '8761').call()
+                        dockerDeploy('stg', "${HOST_PORT}", "${CONT_PORT}").call()
                     }
                         }
                         
@@ -184,7 +186,7 @@ def call(Map pipelineParams) {
                             input message: "deploying  ${APPLICATION_NAME} to prod, is it okay??", ok: 'yes', submitter: 'ram'
                         }
                     script {
-                        dockerDeploy('prd', '8761', '8761').call()
+                        dockerDeploy('prd', "${HOST_PORT}", "${CONT_PORT}").call()
                     }
                         }
                         
