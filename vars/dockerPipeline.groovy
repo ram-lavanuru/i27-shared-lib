@@ -212,12 +212,12 @@ def imageValidation() {
     }
 }
 
-// def build() {
-//     return {
-//         echo "*****builiding the ${env.APPLICATION_NAME} application"
-//         sh 'mvn clean package -DskipTests=true'
-//     }
-// }
+def build() {
+    return {
+        echo "*****builiding the ${env.APPLICATION_NAME} application"
+        sh 'mvn clean package -DskipTests=true'
+    }
+}
 
 
 def dockerBuild() {
