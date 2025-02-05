@@ -3,6 +3,7 @@ import com.i27academy.builds.Docker
 
 def call(Map pipelineParams) {
     Calculator calculator = new Calculator(this)
+    Docker docker = new Docker(this)
 
     pipeline {
         agent {
