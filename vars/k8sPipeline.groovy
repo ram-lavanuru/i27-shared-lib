@@ -5,6 +5,7 @@ import com.i27academy.k8s.k8s
 def call(Map pipelineParams) {
     Calculator calculator = new Calculator(this)
     Docker docker = new Docker(this)
+    k8s k8s = new k8s(this)
 
     pipeline {
         agent {
@@ -63,7 +64,9 @@ def call(Map pipelineParams) {
             stage('Authentication') {
                 steps {
                     echo "executing in gcp project"
-                    k8s.auth_login()
+                    steps {
+                        k8s.auth_login()
+                    }
                 }
             }
             stage('build') {
