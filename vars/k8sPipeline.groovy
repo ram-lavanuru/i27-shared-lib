@@ -64,7 +64,7 @@ def call(Map pipelineParams) {
             stage('Authentication') {
                 steps {
                     echo "executing in gcp project"
-                    steps {
+                    script {
                         k8s.auth_login()
                     }
                 }
