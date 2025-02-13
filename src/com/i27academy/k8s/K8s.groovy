@@ -15,7 +15,7 @@ class K8s {
         echo "********entering into k8s authentication/login method*****"
         gcloud compute instances list
         echo "********get nodes*****"
-        gcloud compute ssh --zone "us-central1-a" "gke-i27-cluster-default-pool-54ea84ef-d4dl" --project "devops-project-448505"
+        gcloud container clusters get-credentials i27-cluster --zone us-central1-a --project devops-project-448505
         kubectl get nodes
         """
     }
