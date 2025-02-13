@@ -25,7 +25,7 @@ class K8s {
         jenkins.sh"""
         echo "***deploying to dev through k8s***"
         echo "list the files"
-        sh "ls -la"      
+        ls -la      
         """
     }
 }
