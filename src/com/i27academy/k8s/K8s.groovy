@@ -14,6 +14,8 @@ class K8s {
         jenkins.sh"""
         echo "********entering into k8s authentication/login method*****"
         gcloud compute instances list
+        echo "********get nodes*****"
+        kubectl get nodes
         """
     }
 }
