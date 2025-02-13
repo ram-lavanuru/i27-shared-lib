@@ -24,7 +24,7 @@ class K8s {
     def k8sDeploy() {
         jenkins.sh"""
         echo "***deploying to dev through k8s***"
-        sh "list the files"
+        echo "list the files"
         sh "ls -la"      
         """
     }
