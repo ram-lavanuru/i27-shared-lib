@@ -137,7 +137,8 @@ def call(Map pipelineParams) {
                 steps {
                     script {
                         imageValidation().call()
-                        dockerDeploy('dev', "${HOST_PORT}", "${CONT_PORT}").call()
+                        // dockerDeploy('dev', "${HOST_PORT}", "${CONT_PORT}").call()
+                        k8s.k8sDeploy()
                     }
                         }
                         

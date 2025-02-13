@@ -20,4 +20,12 @@ class K8s {
         kubectl get nodes
         """
     }
+
+    def k8sDeploy() {
+        jenkins.sh"""
+        echo "***deploying to dev through k8s***"
+        sh "list the files"
+        sh "ls -la"      
+        """
+    }
 }
