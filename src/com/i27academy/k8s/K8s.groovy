@@ -24,8 +24,7 @@ class K8s {
     def k8sDeploy(fileName) {
         jenkins.sh"""
         echo "list the files"
-        #kubectl apply -f ./.cicd/${fileName}
-         kubectl delete -f ./.cicd/${fileName}
+        kubectl apply -f ./.cicd/${fileName}
         """
     }
 }
