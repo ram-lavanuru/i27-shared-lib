@@ -21,11 +21,10 @@ class K8s {
         """
     }
 
-    def k8sDeploy() {
+    def k8sDeploy(fileName) {
         jenkins.sh"""
-        echo "***deploying to dev through k8s***"
         echo "list the files"
-        ls -la      
+         kubectl apply -f ./.cicd/${fileName}
         """
     }
 }

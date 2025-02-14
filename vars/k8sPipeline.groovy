@@ -58,6 +58,10 @@ def call(Map pipelineParams) {
                 POM_PACKAGING = readMavenPom().getPackaging()
                 DOCKER_HUB = "docker.io/venkat315"
                 DOCKER_CREDS = credentials('docker-creds')
+                K8S_DEV_FILE = k8s_dev.yaml
+                K8S_TEST_FILE = k8s_tst.yaml
+                K8S_STAGE_FILE = k8s_stage.yaml
+                K8S_PROD_FILE = k8s_prod.yaml
                 
         }
         stages {
@@ -138,7 +142,7 @@ def call(Map pipelineParams) {
                     script {
                         imageValidation().call()
                         // dockerDeploy('dev', "${HOST_PORT}", "${CONT_PORT}").call()
-                        k8s.k8sDeploy()
+                        k8s.k8sDeploy("${env.K8S_DEV_FILE}")
                     }
                         }
                         
@@ -152,7 +156,8 @@ def call(Map pipelineParams) {
                 steps {
                     script {
                         imageValidation().call()
-                        dockerDeploy('tst', "${HOST_PORT}", "${CONT_PORT}").call()
+                        // dockerDeploy('tst', "${HOST_PORT}", "${CONT_PORT}").call()
+                        k8s.k8sDeploy("${env.K8S_TEST_FILE}")   
                     }
                         }
                         
@@ -173,7 +178,8 @@ def call(Map pipelineParams) {
                 steps {
                     script {
                         imageValidation().call()
-                        dockerDeploy('stg', "${HOST_PORT}", "${CONT_PORT}").call()
+                        // dockerDeploy('stg', "${HOST_PORT}", "${CONT_PORT}").call()
+                        k8s.k8sDeply("${env.K8S_STAGE_FILE}")
                     }
                         }
                         
@@ -197,7 +203,8 @@ def call(Map pipelineParams) {
                             input message: "deploying  ${APPLICATION_NAME} to prod, is it okay??", ok: 'yes', submitter: 'ram'
                         }
                     script {
-                        dockerDeploy('prd', "${HOST_PORT}", "${CONT_PORT}").call()
+                        // dockerDeploy('prd', "${HOST_PORT}", "${CONT_PORT}").call()
+                        k8s.k8sDeploy("${env.K8S_PROD_FILE}")
                     }
                         }
                         
