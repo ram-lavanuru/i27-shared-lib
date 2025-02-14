@@ -58,10 +58,10 @@ def call(Map pipelineParams) {
                 POM_PACKAGING = readMavenPom().getPackaging()
                 DOCKER_HUB = "docker.io/venkat315"
                 DOCKER_CREDS = credentials('docker-creds')
-                K8S_DEV_FILE = k8s_dev.yaml
-                K8S_TEST_FILE = k8s_tst.yaml
-                K8S_STAGE_FILE = k8s_stage.yaml
-                K8S_PROD_FILE = k8s_prod.yaml
+                K8S_DEV_FILE = "k8s_dev.yaml"
+                K8S_TEST_FILE = "k8s_tst.yaml"
+                K8S_STAGE_FILE = "k8s_stage.yaml"
+                K8S_PROD_FILE = "k8s_prod.yaml"
                 
         }
         stages {
