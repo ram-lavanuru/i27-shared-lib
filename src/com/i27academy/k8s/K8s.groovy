@@ -21,9 +21,10 @@ class K8s {
         """
     }
 
-    def k8sDeploy(fileName) {
+    def k8sDeploy(fileName, docker_image) {
         jenkins.sh"""
         echo "list the files"
+        sed -i "s|DIT|***|g" ./.cicd/${fileName}
         kubectl apply -f ./.cicd/${fileName}
         """
     }

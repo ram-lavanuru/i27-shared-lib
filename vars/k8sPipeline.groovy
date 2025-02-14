@@ -140,9 +140,10 @@ def call(Map pipelineParams) {
                 }
                 steps {
                     script {
+                        def docker_image = "${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT}"
                         imageValidation().call()
                         // dockerDeploy('dev', "${HOST_PORT}", "${CONT_PORT}").call()
-                        k8s.k8sDeploy("${env.K8S_DEV_FILE}")
+                        k8s.k8sDeploy("${env.K8S_DEV_FILE}", docker_image)
                     }
                         }
                         
@@ -155,9 +156,10 @@ def call(Map pipelineParams) {
                 }
                 steps {
                     script {
+                        def docker_image = "${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT}"
                         imageValidation().call()
                         // dockerDeploy('tst', "${HOST_PORT}", "${CONT_PORT}").call()
-                        k8s.k8sDeploy("${env.K8S_TEST_FILE}")   
+                        k8s.k8sDeploy("${env.K8S_TEST_FILE}", docker_image)   
                     }
                         }
                         
@@ -177,9 +179,10 @@ def call(Map pipelineParams) {
                 }
                 steps {
                     script {
+                        def docker_image = "${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT}"
                         imageValidation().call()
                         // dockerDeploy('stg', "${HOST_PORT}", "${CONT_PORT}").call()
-                        k8s.k8sDeply("${env.K8S_STAGE_FILE}")
+                        k8s.k8sDeply("${env.K8S_STAGE_FILE}", docker_image)
                     }
                         }
                         
@@ -203,8 +206,9 @@ def call(Map pipelineParams) {
                             input message: "deploying  ${APPLICATION_NAME} to prod, is it okay??", ok: 'yes', submitter: 'ram'
                         }
                     script {
+                        def docker_image = "${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT}"
                         // dockerDeploy('prd', "${HOST_PORT}", "${CONT_PORT}").call()
-                        k8s.k8sDeploy("${env.K8S_PROD_FILE}")
+                        k8s.k8sDeploy("${env.K8S_PROD_FILE}", docker_image)
                     }
                         }
                         
