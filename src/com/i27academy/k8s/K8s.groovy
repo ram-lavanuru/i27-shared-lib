@@ -24,8 +24,8 @@ class K8s {
     def k8sDeploy(fileName, docker_image) {
         jenkins.sh"""
         echo "list the files"
-        sed -i "s|DIT|${docker_image}|g" ./.cicd/${fileName} -n cart-dev-ns
-        kubectl apply -f ./.cicd/${fileName}
+        sed -i "s|DIT|${docker_image}|g" ./.cicd/${fileName} 
+        kubectl apply -f ./.cicd/${fileName} -n cart-dev-ns
         """
     }
 }
