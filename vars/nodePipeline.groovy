@@ -39,7 +39,7 @@ def call(Map pipelineParams){
 
         environment {
             APPLICATION_NAME = "${pipelineParams.appName}"
-            DOCKER_HUB = "docker.io/i27devopsb4"
+            DOCKER_HUB = "docker.io/venkat315"
             DOCKER_CREDS = credentials('docker-creds') //username and password
             K8S_DEV_FILE = "k8s_dev.yaml"
             K8S_TST_FILE = "k8s_tst.yaml"
