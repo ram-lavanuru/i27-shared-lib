@@ -176,7 +176,7 @@ def imageValidation() {
         }
         catch(Exception e) {
             println("OOPS!, the docker image with this tag is not available,So Creating the Image")
-            buildApp().call()
+            // buildApp().call()
             dockerBuildAndPush().call()
         }
     }
