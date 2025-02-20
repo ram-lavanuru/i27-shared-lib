@@ -65,6 +65,7 @@ def call(Map pipelineParams) {
                 JFROG_DOCKER_REGISTRY = "i27devopsd4.jfrog.io"
                 JFROG_REPO_NAME = "cont-images-docker-docker"
                 JFROG_CREDS = credentials('jfrog-creds')
+                DEV_NAMESPACE = "cart-dev-ns"
                 
         }
         stages {
@@ -146,7 +147,7 @@ def call(Map pipelineParams) {
                         def docker_image = "${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT}"
                         imageValidation().call()
                         // dockerDeploy('dev', "${HOST_PORT}", "${CONT_PORT}").call()
-                        k8s.k8sDeploy("${env.K8S_DEV_FILE}", docker_image)
+                        k8s.k8sDeploy("${env.K8S_DEV_FILE}", docker_image, ${DEV_NAMESPACE})
                     }
                         }
                         
