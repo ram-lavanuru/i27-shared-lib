@@ -29,13 +29,21 @@ class K8s {
         """
     }
 
-    def k8sHelmChartDeploy(appName, env, helmChartPath, imageTag) {
+    def k8sHelmChartDeploy(appName, env, helmChartPath, imageTag, namespace) {
         jenkins.sh"""
         echo ****entering into helm deployments****
         helm version
         pwd
         ls -ll
-        helm install ${appName}-${env}-chart -f ./.cicd/helm_values/values_${env}.yaml --set image.tag=${imageTag} ${helmChartPath}
+        echo ***verifying if the helm charts exits***
+        if helm list -n ${namespace} | grep -i "eureka-dev-chart"; then
+            echo "this hart exists"
+            echo "upgrading char"
+        helm upgrade ${appName}-${env}-chart -f ./.cicd/helm_values/values_${env}.yaml --set image.tag=${imageTag} ${helmChartPath} -n ${namespace}
+        else
+            echo "chart not exists installing the chart"
+        helm install ${appName}-${env}-chart -f ./.cicd/helm_values/values_${env}.yaml --set image.tag=${imageTag} ${helmChartPath} -n ${namespace}
+        fi
         """
     }
     def gitClone() {
