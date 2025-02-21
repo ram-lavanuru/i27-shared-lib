@@ -36,7 +36,7 @@ class K8s {
         pwd
         ls -ll
         echo ***verifying if the helm charts exits***
-        if helm list -n ${namespace} | grep -i "eureka-dev-chart"; then
+        if helm list -n ${namespace} | grep -q "eureka-dev-chart"; then
             echo "this hart exists"
             echo "upgrading char"
         helm upgrade ${appName}-${env}-chart -f ./.cicd/helm_values/values_${env}.yaml --set image.tag=${imageTag} ${helmChartPath} -n ${namespace}
@@ -49,6 +49,7 @@ class K8s {
     def gitClone() {
         jenkins.sh"""
         echo ***entering into git clone menthod***
+        rm -rf 
         git clone -b main https://github.com/ram-lavanuru/i27-shared-lib.git
         echo ***listing files in workspace***
         ls -la
