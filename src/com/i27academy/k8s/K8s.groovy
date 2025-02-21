@@ -35,7 +35,7 @@ class K8s {
         helm version
         pwd
         ls -ll
-        helm upgrade ${appName}-${env}-chart -f ./.cicd/helm_values/values_${env}.yaml --set image.tag=${imageTag} ${helmChartPath}
+        helm install ${appName}-${env}-chart -f ./.cicd/helm_values/values_${env}.yaml --set image.tag=${imageTag} ${helmChartPath}
         """
     }
     def gitClone() {
