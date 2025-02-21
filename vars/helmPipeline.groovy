@@ -82,6 +82,13 @@ def call(Map pipelineParams) {
                     }
                 }
             }
+            stage('git clone shared lib') {
+                steps {
+                    script {
+                        k8s.gitClone()
+                    }
+                }
+            }
             stage('build') {
             when {
                 anyOf {

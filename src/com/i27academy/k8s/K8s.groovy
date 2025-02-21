@@ -38,4 +38,12 @@ class K8s {
         helm upgrade ${appName}-${env}-chart -f ./.cicd/helm_values/values_${env}.yaml --set image.tag=${imageTag} ${helmChartPath}
         """
     }
+    def gitClone() {
+        jenkins.sh"""
+        echo ***entering into git clone menthod***
+        git clone -b main https://github.com/ram-lavanuru/i27-shared-lib.git
+        echo ***listing files in workspace***
+        ls -la
+        """
+    }
 }
