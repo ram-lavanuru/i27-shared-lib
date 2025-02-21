@@ -41,6 +41,7 @@ class K8s {
     def gitClone() {
         jenkins.sh"""
         echo ***entering into git clone menthod***
+        credentialsId: 'github-creds'
         git clone -b main https://github.com/ram-lavanuru/i27-shared-lib.git
         echo ***listing files in workspace***
         ls -la
